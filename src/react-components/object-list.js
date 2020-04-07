@@ -21,6 +21,8 @@ import {
   mediaSortOrder,
   mediaSort
 } from "../utils/media-sorting.js";
+import qsTruthy from "../utils/qs_truthy";
+const ENABLE_OBJECT_LIST = !qsTruthy("dol");
 
 const THUMBNAIL_TITLE = new Map([
   [SORT_ORDER_VIDEO, "Video"],
@@ -151,6 +153,9 @@ export default class ObjectList extends Component {
   }
 
   render() {
+    if (!ENABLE_OBJECT_LIST) {
+      return <div />;
+    }
     return (
       <div>
         <div

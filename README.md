@@ -59,6 +59,7 @@ This will allow the CSP checks to pass that are served up by Reticulum so you ca
 - `idle_timeout` - Idle timeout in seconds
 - `avatar_scale` - Scale your self!
 - `mobile` - Force mobile mode
+- `nol` - Disable object list
 - `no_stats` - Disable performance stats
 - `vr_entry_type` - Either "2d", "vr", or "daydream". Used internally to force a VR entry type. Add "_now" to the end of the value to skip the audio check.
 - `disable_telemetry` - If `true` disables Sentry telemetry.
