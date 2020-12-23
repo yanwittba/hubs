@@ -1,4 +1,5 @@
 import { computeObjectAABB, getBox, getScaleCoefficient } from "../utils/auto-box-collider";
+import transparent from "../assets/transparent.png";
 import {
   resolveUrl,
   getDefaultResolveQuality,
@@ -379,7 +380,7 @@ AFRAME.registerComponent("media-loader", {
         const is360 = !!(this.data.mediaOptions.projection && this.data.mediaOptions.projection.startsWith("360"));
         const quality = getDefaultResolveQuality(is360);
         const result = await resolveUrl(src, quality, version, forceLocalRefresh);
-        canonicalUrl = result.origin;
+        canonicalUrl =  result.origin;
 
         // handle protocol relative urls
         if (canonicalUrl.startsWith("//")) {
@@ -588,8 +589,11 @@ AFRAME.registerComponent("media-loader", {
                 isFlat: true
               });
             } else {
-              this.el.setAttribute("hover-menu__link", { template: "#link-hover-menu", isFlat: true });
+              // this.el.setAttribute("hover-menu__hubs-item", { template: "#link-hover-menu", isFlat: true });
+              this.el.setAttribute("hover-menu-alwayshow__hubs-item", { template: "#link-hover-menu", isFlat: true});
+
             }
+            //#MARK
             this.onMediaLoaded(SHAPE.BOX);
           },
           { once: true }
@@ -599,10 +603,14 @@ AFRAME.registerComponent("media-loader", {
         if (this.data.mediaOptions.hasOwnProperty("batch") && !this.data.mediaOptions.batch) {
           batch = false;
         }
+        // const url = "https://miro.medium.com/max/1838/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg";
+        const url =  transparent;
+        // this.el.setAttribute("shape-helper__loader", { type: SHAPE.BOX });
+        // this.onMediaLoaded(SHAPE.BOX);
         this.el.setAttribute(
           "media-image",
           Object.assign({}, this.data.mediaOptions, {
-            src: thumbnail,
+            src: url,
             version,
             contentType: guessContentType(thumbnail) || "image/png",
             batch
