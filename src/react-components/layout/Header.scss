@@ -35,6 +35,7 @@ header {
     }
 
     a {
+      color: honeydew;
       margin: 0 16px;
       font-size: 1.4em;
     }
@@ -59,16 +60,21 @@ header {
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
-  
+
     @media(min-width: $breakpoint-lg) {
       flex-direction: row;
       justify-content: flex-end;
       flex: 1;
       padding-top: 0;
     }
-  
+
     a {
       text-decoration: underline;
     }
   }
+}
+
+.header-syle {
+  background-color: #7bcabc;
+  color: honeydew;
 }

@@ -46,7 +46,7 @@ export function HomePage() {
 
   const canCreateRooms = !configs.feature("disable_room_creation") || auth.isAdmin;
 
-  const pageStyle = { backgroundImage: configs.image("home_background", true) };
+  //const pageStyle = { backgroundImage: configs.image("home_background", true) };
 
   const logoUrl = configs.image("logo");
 
@@ -55,11 +55,9 @@ export function HomePage() {
   const logoStyles = classNames(styles.logoContainer, {
     [styles.centerLogo]: !showDescription
   });
-
-  return (
+	/**
     <Page className={styles.homePage} style={pageStyle}>
-      <section>
-        <div className={styles.appInfo}>
+	  <div className={styles.appInfo}>
           <div className={logoStyles}>
             <img src={logoUrl} />
           </div>
@@ -69,11 +67,9 @@ export function HomePage() {
             </div>
           )}
         </div>
-        <div className={styles.ctaButtons}>
-          {canCreateRooms && <CreateRoomButton />}
-          <PWAButton />
-        </div>
-      </section>
+	 */
+  return (
+    <Page className={styles.homePage}>
       {featuredRooms.length === 0 && (
         <IfFeature name="show_feature_panels">
           <section className={classNames(styles.features, styles.colLg, styles.centerLg)}>
@@ -107,10 +103,15 @@ export function HomePage() {
           </section>
         </IfFeature>
       )}
+			<section className="rooms-title">
+				<h3>Rooms</h3>
+			</section>
       {featuredRooms.length > 0 && (
-        <section className={styles.featuredRooms}>
-          <MediaGrid>{featuredRooms.map(room => <RoomTile key={room.id} room={room} />)}</MediaGrid>
-        </section>
+				<div>
+					<section className={styles.featuredRooms}>
+						<MediaGrid>{featuredRooms.map(room => <RoomTile key={room.id} room={room} />)}</MediaGrid>
+					</section>
+				</div>
       )}
       <section>
         <div className={styles.secondaryLinks}>
@@ -127,6 +128,12 @@ export function HomePage() {
               <FormattedMessage id="home.add_to_discord_3" />
             </IfFeature>
           </div>
+        </div>
+      </section>
+      <section>
+        <div className={styles.ctaButtons}>
+          {canCreateRooms && <CreateRoomButton />}
+          <PWAButton />
         </div>
       </section>
     </Page>
