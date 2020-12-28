@@ -21,10 +21,12 @@ export function HomePage() {
   const { results: favoriteRooms } = useFavoriteRooms();
   const { results: publicRooms } = usePublicRooms();
 
-  const featuredRooms = Array.from(new Set([...favoriteRooms, ...publicRooms])).sort(
+  const favoritesRooms = Array.from(new Set([...favoriteRooms])).sort(
     (a, b) => b.member_count - a.member_count
   );
-
+	const featuredRooms = Array.from(new Set([...publicRooms])).sort(
+    (a, b) => b.member_count - a.member_count
+  );
   useEffect(() => {
     const qs = new URLSearchParams(location.search);
 
@@ -46,7 +48,7 @@ export function HomePage() {
 
   const canCreateRooms = !configs.feature("disable_room_creation") || auth.isAdmin;
 
-  //const pageStyle = { backgroundImage: configs.image("home_background", true) };
+  const pageStyle = { backgroundImage: configs.image("home_background", true) };
 
   const logoUrl = configs.image("logo");
 
@@ -68,9 +70,8 @@ export function HomePage() {
           )}
         </div>
 	 */
-  return (
-    <Page className={styles.homePage}>
-      {featuredRooms.length === 0 && (
+	/*
+			{featuredRooms.length === 0 && (
         <IfFeature name="show_feature_panels">
           <section className={classNames(styles.features, styles.colLg, styles.centerLg)}>
             <div className={styles.center}>
@@ -103,13 +104,33 @@ export function HomePage() {
           </section>
         </IfFeature>
       )}
-			<section className="rooms-title">
-				<h3>Rooms</h3>
+	 */
+  return (
+    <Page className={styles.homePage}>
+			<section className="Home-background" style={pageStyle}>
+				<div className={styles.appInfo}>
+          <div className={logoStyles}>
+            <img src={logoUrl} />
+          </div>
+        </div>
 			</section>
       {featuredRooms.length > 0 && (
-				<div>
+				<div style={{width:"100%"}}>
+					<section className="rooms-title">
+						<h3>Rooms</h3>
+					</section>
 					<section className={styles.featuredRooms}>
 						<MediaGrid>{featuredRooms.map(room => <RoomTile key={room.id} room={room} />)}</MediaGrid>
+					</section>
+				</div>
+      )}
+      {favoritesRooms.length > 0 && (
+				<div style={{width:"100%"}}>
+					<section className="rooms-title">
+						<h3>Favorite Rooms</h3>
+					</section>
+					<section className={styles.featuredRooms}>
+						<MediaGrid>{favoritesRooms.map(room => <RoomTile key={room.id} room={room} />)}</MediaGrid>
 					</section>
 				</div>
       )}

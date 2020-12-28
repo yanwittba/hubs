@@ -21,9 +21,7 @@ export function Header() {
           <ul>
             <li>
               <a href="/">
-							<div className="">
-								<img src={logoUrl} style={{width: "auto",maxHeight: "55px"}}/>
-							</div>
+								<img src={logoUrl} style={{width: "auto",maxHeight: "55px",marginTop: "7px"}}/>
 							</a>
             </li>
             <li>

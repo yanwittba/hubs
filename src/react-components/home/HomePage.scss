@@ -146,6 +146,18 @@
 
 .rooms-title {
   width: 100%;
+  min-height: 42px;
   text-align: center;
   background-color: #e5f4f2;
+
+  h3 {
+    line-height: 42px;
+  }
+}
+
+.Home-background {
+  width: 100%;
+  min-height: 320px;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
