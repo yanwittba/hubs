@@ -9,7 +9,7 @@ import styles from "./Footer.scss";
 export function Footer() {
   return (
     <WrappedIntlProvider>
-      <footer>
+      <footer className="footer-style">
         <div className={styles.poweredBy}>
           <UnlessFeature name="hide_powered_by">
             <span className={styles.prefix}>

@@ -21,10 +21,12 @@ export function HomePage() {
   const { results: favoriteRooms } = useFavoriteRooms();
   const { results: publicRooms } = usePublicRooms();
 
-  const featuredRooms = Array.from(new Set([...favoriteRooms, ...publicRooms])).sort(
+  const favoritesRooms = Array.from(new Set([...favoriteRooms])).sort(
     (a, b) => b.member_count - a.member_count
   );
-
+	const featuredRooms = Array.from(new Set([...publicRooms])).sort(
+    (a, b) => b.member_count - a.member_count
+  );
   useEffect(() => {
     const qs = new URLSearchParams(location.search);
 
@@ -55,11 +57,9 @@ export function HomePage() {
   const logoStyles = classNames(styles.logoContainer, {
     [styles.centerLogo]: !showDescription
   });
-
-  return (
+	/**
     <Page className={styles.homePage} style={pageStyle}>
-      <section>
-        <div className={styles.appInfo}>
+	  <div className={styles.appInfo}>
           <div className={logoStyles}>
             <img src={logoUrl} />
           </div>
@@ -69,12 +69,9 @@ export function HomePage() {
             </div>
           )}
         </div>
-        <div className={styles.ctaButtons}>
-          {canCreateRooms && <CreateRoomButton />}
-          <PWAButton />
-        </div>
-      </section>
-      {featuredRooms.length === 0 && (
+	 */
+	/*
+			{featuredRooms.length === 0 && (
         <IfFeature name="show_feature_panels">
           <section className={classNames(styles.features, styles.colLg, styles.centerLg)}>
             <div className={styles.center}>
@@ -107,10 +104,35 @@ export function HomePage() {
           </section>
         </IfFeature>
       )}
+	 */
+  return (
+    <Page className={styles.homePage}>
+			<section className="Home-background" style={pageStyle}>
+				<div className={styles.appInfo}>
+          <div className={logoStyles}>
+            <img src={logoUrl} />
+          </div>
+        </div>
+			</section>
       {featuredRooms.length > 0 && (
-        <section className={styles.featuredRooms}>
-          <MediaGrid>{featuredRooms.map(room => <RoomTile key={room.id} room={room} />)}</MediaGrid>
-        </section>
+				<div style={{width:"100%"}}>
+					<section className="rooms-title">
+						<h3>Rooms</h3>
+					</section>
+					<section className={styles.featuredRooms}>
+						<MediaGrid>{featuredRooms.map(room => <RoomTile key={room.id} room={room} />)}</MediaGrid>
+					</section>
+				</div>
+      )}
+      {favoritesRooms.length > 0 && (
+				<div style={{width:"100%"}}>
+					<section className="rooms-title">
+						<h3>Favorite Rooms</h3>
+					</section>
+					<section className={styles.featuredRooms}>
+						<MediaGrid>{favoritesRooms.map(room => <RoomTile key={room.id} room={room} />)}</MediaGrid>
+					</section>
+				</div>
       )}
       <section>
         <div className={styles.secondaryLinks}>
@@ -127,6 +149,12 @@ export function HomePage() {
               <FormattedMessage id="home.add_to_discord_3" />
             </IfFeature>
           </div>
+        </div>
+      </section>
+      <section>
+        <div className={styles.ctaButtons}>
+          {canCreateRooms && <CreateRoomButton />}
+          <PWAButton />
         </div>
       </section>
     </Page>

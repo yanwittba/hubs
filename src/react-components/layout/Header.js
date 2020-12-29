@@ -12,11 +12,18 @@ import { WrappedIntlProvider } from "../wrapped-intl-provider";
 export function Header() {
   const auth = useContext(AuthContext);
 
+	const logoUrl = configs.image("logo");
+	
   return (
     <WrappedIntlProvider>
-      <header>
+      <header className="header-syle">
         <nav>
           <ul>
+            <li>
+              <a href="/">
+								<img src={logoUrl} style={{width: "auto",maxHeight: "55px",marginTop: "7px"}}/>
+							</a>
+            </li>
             <li>
               <a href="/">Home</a>
             </li>

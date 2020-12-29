@@ -154,6 +154,49 @@ class Menu extends Component {
                 <BackupIcon />
               </ListItemIcon>
               <ListItemText className={this.props.classes.text} primary="Import Content" />
+            </ListItem><ListItem
+              className={classNames(this.props.classes.item, this.props.classes.nested)}
+              component={NavLink}
+              key="events"
+              to="/events"
+            >
+              <ListItemIcon className={this.props.classes.icon}>
+                <ViewIcon />
+              </ListItemIcon>
+              <ListItemText className={this.props.classes.text} primary="Events" />
+            </ListItem>
+            <ListItem
+              className={classNames(this.props.classes.item, this.props.classes.nested)}
+              component={NavLink}
+              key="rooms"
+              to="/rooms"
+            >
+              <ListItemIcon className={this.props.classes.icon}>
+                <ViewIcon />
+              </ListItemIcon>
+              <ListItemText className={this.props.classes.text} primary="Rooms" />
+            </ListItem>
+            <ListItem
+              className={classNames(this.props.classes.item, this.props.classes.nested)}
+              component={NavLink}
+              key="user-accounts"
+              to="/user-accounts"
+            >
+              <ListItemIcon className={this.props.classes.icon}>
+                <ViewIcon />
+              </ListItemIcon>
+              <ListItemText className={this.props.classes.text} primary="User Accounts" />
+            </ListItem>
+            <ListItem
+              className={classNames(this.props.classes.item, this.props.classes.nested)}
+              component={NavLink}
+              key="reports"
+              to="/reports"
+            >
+              <ListItemIcon className={this.props.classes.icon}>
+                <ViewIcon />
+              </ListItemIcon>
+              <ListItemText className={this.props.classes.text} primary="Reports" />
             </ListItem>
             {this.props.resources.map(this.renderResource.bind(this))}
           </List>

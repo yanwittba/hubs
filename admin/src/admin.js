@@ -103,7 +103,11 @@ class AdminUI extends Component {
     if (!this.state.showAutoEndSessionDialog || this.state.sessionEnded) return;
     this.setState({ showAutoEndSessionDialog: false });
   };
-
+	/*
+  <Resource name="accounts" list={AccountList} edit={AccountEdit} />
+  <Resource name="identities" list={IdentityList} create={IdentityCreate} edit={IdentityEdit} />
+  <Resource name="projects" list={ProjectList} show={ProjectShow} />
+	*/
   render() {
     return (
       <>
@@ -119,6 +123,7 @@ class AdminUI extends Component {
               logoutButton={() => <span />}
               theme={theme}
             >
+							<Resource name="scenes" list={SceneList} edit={SceneEdit} />
               <Resource name="pending_scenes" list={PendingSceneList} />
               <Resource
                 name="scene_listings"
@@ -133,6 +138,7 @@ class AdminUI extends Component {
                 options={{ label: "Featured scenes" }}
               />
 
+							<Resource name="avatars" list={AvatarList} edit={AvatarEdit} />
               <Resource name="pending_avatars" list={AvatarList} />
               <Resource
                 name="avatar_listings"
@@ -146,14 +152,7 @@ class AdminUI extends Component {
                 edit={AvatarListingEdit}
                 options={{ label: "Featured avatars" }}
               />
-
-              <Resource name="accounts" list={AccountList} edit={AccountEdit} />
-              <Resource name="identities" list={IdentityList} create={IdentityCreate} edit={IdentityEdit} />
-              <Resource name="scenes" list={SceneList} edit={SceneEdit} />
-              <Resource name="avatars" list={AvatarList} edit={AvatarEdit} />
-              <Resource name="owned_files" />
-
-              <Resource name="projects" list={ProjectList} show={ProjectShow} />
+							<Resource name="owned_files" />
             </Admin>
             {this.state.showAutoEndSessionDialog && (
               <AutoEndSessionDialog
