@@ -207,7 +207,6 @@ import "./components/tools/drawing-manager";
 
 import "./components/body-helper";
 import "./components/shape-helper";
-
 import registerNetworkSchemas from "./network-schemas";
 import registerTelemetry from "./telemetry";
 import { warmSerializeElement } from "./utils/serialize-element";
@@ -233,9 +232,9 @@ disableiOSZoom();
 detectConcurrentLoad();
 
 function setupLobbyCamera() {
+  console.log("Set Up Cameraaaaa")
   const camera = document.getElementById("scene-preview-node");
   const previewCamera = document.getElementById("environment-scene").object3D.getObjectByName("scene-preview-camera");
-
   if (previewCamera) {
     camera.object3D.position.copy(previewCamera.position);
     camera.object3D.rotation.copy(previewCamera.rotation);
@@ -386,8 +385,12 @@ async function updateEnvironmentForHub(hub, entryManager) {
     sceneUrl = proxiedUrlFor(sceneUrl);
   }
 
-  console.log(`Scene URL: ${sceneUrl}`);
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  var c = url.searchParams.get("warp");
+  //console.log(c);
 
+console.log("POINTTTTTTTTTTTTTTT" ,c);
   let environmentEl = null;
 
   if (environmentScene.childNodes.length === 0) {
@@ -437,7 +440,7 @@ async function updateEnvironmentForHub(hub, entryManager) {
             }
 
             const fader = document.getElementById("viewing-camera").components["fader"];
-
+          
             // Add a slight delay before de-in to reduce hitching.
             setTimeout(() => fader.fadeIn(), 2000);
           },
@@ -473,7 +476,7 @@ async function updateUIForHub(hub, hubChannel) {
 function handleHubChannelJoined(entryManager, hubChannel, messageDispatch, data) {
   const scene = document.querySelector("a-scene");
   const isRejoin = NAF.connection.isConnected();
-
+  console.log("=========================Join=========================");
   if (isRejoin) {
     // Slight hack, to ensure correct presence state we need to re-send the entry event
     // on re-join. Ideally this would be updated into the channel socket state but this
