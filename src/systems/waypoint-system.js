@@ -253,9 +253,17 @@ export class WaypointSystem {
     }
   }
   getUnoccupiableSpawnPoint() {
+    console.log(this.ready);
     const candidates = this.ready.filter(component => isUnoccupiableSpawnPoint(component.data));
     return candidates.length && candidates.splice(Math.floor(Math.random() * candidates.length), 1)[0];
   }
+  selectSpawnPointByID(warpID) {
+    console.log(this.ready);
+    const candidates = this.ready[warpID];
+    return candidates
+  }
+
+
   lostOwnershipOfWaypoint(e) {
     if (this.currentWaypoint && this.currentWaypoint.el === e.detail.el) {
       this.mightNeedRespawn = true;
@@ -311,7 +319,14 @@ export class WaypointSystem {
     );
   }
   moveToUnoccupiableSpawnPoint() {
-    const waypointComponent = this.getUnoccupiableSpawnPoint();
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var c = url.searchParams.get("warp");
+    let waypointComponent ;
+    if(c)
+    waypointComponent = this.selectSpawnPointByID(c);
+    else
+     waypointComponent = this.getUnoccupiableSpawnPoint();
     if (waypointComponent) {
       this.moveToWaypoint(waypointComponent, true);
     }
