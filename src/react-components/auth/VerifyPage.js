@@ -91,6 +91,6 @@ export function VerifyPage() {
   }
 
   return (
-    <Page style={{ backgroundImage: configs.image("home_background", true), backgroundSize: "cover" }}>{content}</Page>
+    <Page>{content}</Page>
   );
 }

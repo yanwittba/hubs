@@ -224,6 +224,7 @@ class UIRoot extends Component {
 
     // An exit handler that discards event arguments and can be cleaned up.
     this.exitEventHandler = () => this.exit();
+		//console.log(document.location.pathname);
   }
 
   componentDidUpdate(prevProps) {

@@ -255,6 +255,7 @@ module.exports = async (env, argv) => {
       cloud: path.join(__dirname, "src", "cloud.js"),
       signin: path.join(__dirname, "src", "signin.js"),
       verify: path.join(__dirname, "src", "verify.js"),
+      event: path.join(__dirname, "src", "event.js"),
       "whats-new": path.join(__dirname, "src", "whats-new.js")
     },
     output: {
@@ -278,7 +279,8 @@ module.exports = async (env, argv) => {
           { from: /^\/discord/, to: "/discord.html" },
           { from: /^\/cloud/, to: "/cloud.html" },
           { from: /^\/verify/, to: "/verify.html" },
-          { from: /^\/whats-new/, to: "/whats-new.html" }
+          { from: /^\/whats-new/, to: "/whats-new.html" },
+          { from: /^\/hub/, to: "/hub.html" }
         ]
       },
       before: function(app) {
@@ -554,6 +556,15 @@ module.exports = async (env, argv) => {
         filename: "verify.html",
         template: path.join(__dirname, "src", "verify.html"),
         chunks: ["verify"],
+        minify: {
+          removeComments: false
+        }
+      }),
+      new HTMLWebpackPlugin({
+        filename: "event.html",
+        template: path.join(__dirname, "src", "event.html"),
+        chunks: ["support", "event"],
+        chunksSortMode: "manual",
         minify: {
           removeComments: false
         }

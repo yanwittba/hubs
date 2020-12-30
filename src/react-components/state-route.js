@@ -10,8 +10,8 @@ class StateRoute extends React.Component {
     stateKey: PropTypes.string,
     stateValue: PropTypes.string,
     history: PropTypes.object
-  };
-
+	};
+	
   render() {
     const { history, stateKey, stateValue, ...routeProps } = this.props;
 
