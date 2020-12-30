@@ -259,13 +259,13 @@ let routerBaseName = document.location.pathname
   .join("/");
 
 if (document.location.pathname.includes("hub.html")) {
-  routerBaseName = "/hub";
+  routerBaseName = "/";
 }
 
 console.log(routerBaseName);
 
 // when loading the client as a "default room" on the homepage, use MemoryHistory since exposing all the client paths at the root is undesirable
-const history = routerBaseName === "/hub" ? createMemoryHistory() : createBrowserHistory({ basename: routerBaseName });
+const history = routerBaseName === "/" ? createMemoryHistory() : createBrowserHistory({ basename: routerBaseName });
 window.APP.history = history;
 
 const qsVREntryType = qs.get("vr_entry_type");
